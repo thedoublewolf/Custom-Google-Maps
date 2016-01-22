@@ -1,30 +1,31 @@
-function initMap() {
-  var myLatLng = {lat: 33.848528, lng: -84.373106}
-
+function initialize() {
+  var center = new google.maps.LatLng(48.091534,15.5116439);
+  
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: myLatLng,
-    zoom: 17,
-    maxZoom: 20
+    zoom: 3,
+    center: center,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
-  google.maps.event.addListener(map, 'click', function(event) {
-    addMarker(event.latLng, map);
-  });
-
+  // Creates custom icon image
   var image = {
     url: 'images/moving.png',
     size: new google.maps.Size(71, 71),
     origin: new google.maps.Point(0, 0),
     anchor: new google.maps.Point(17, 34),
-    scaledSize: new google.maps.Size(50, 50)
+    scaledSize: new google.maps.Size(30, 30)
   };
 
+  // Content for infoBubble
   var contentString =
       '<div class="infocontent">'+
       '<h1 class="infoheading">Asset</h1>'+
       '</div>'
       ;
 
+  // Find content from JSON data
+
+  // Custom infoBubble
   var infoBubble = new InfoBubble({
     maxWidth: 300,
     content: contentString,
@@ -41,15 +42,51 @@ function initMap() {
     disableAnimation: true
   });
 
-  function addMarker(location, map) {
+  // function addMarker(location, map) {
+
+  //   var markers = [];
+
+  //   var marker = new google.maps.Marker({
+  //     position: location,
+  //     animation: google.maps.Animation.DROP,
+  //     map: map,
+  //     icon: image
+  //   });
+
+  //   marker.addListener('click', function() {
+  //     infoBubble.open(map, marker);
+  //   });
+  // }
+
+  // google.maps.event.addListener(map, 'click', function(event) {
+  //   addMarker(event.latLng, map);
+  // });
+
+  var markers = [];
+  for (var i = 0; i < 1000; i++) {
+    var dataPhoto = data.photos[i];
+    var latLng = new google.maps.LatLng(dataPhoto.latitude,
+              dataPhoto.longitude);
     var marker = new google.maps.Marker({
-      position: location,
-      animation: google.maps.Animation.DROP,
-      map: map,
+      position: latLng,
       icon: image
     });
-    marker.addListener('click', function() {
-      infoBubble.open(map, marker);
-    });
+
+    markers.push(marker);
   }
+  var markerCluster = new MarkerClusterer(map, markers);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
