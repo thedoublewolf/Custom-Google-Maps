@@ -1,11 +1,13 @@
 function initialize() {
   var center = new google.maps.LatLng(48.091534,15.5116439);
-  
+
+  var snazzyStyle = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape.natural","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"transit.station","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#98cee3"},{"visibility":"on"}]}]  
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 3,
     minZoom: 3,
     center: center,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: snazzyStyle
   });
 
   // Creates custom icon image
