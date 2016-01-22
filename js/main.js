@@ -3,6 +3,7 @@ function initialize() {
   
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 3,
+    minZoom: 3,
     center: center,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
@@ -74,7 +75,38 @@ function initialize() {
 
     markers.push(marker);
   }
-  var markerCluster = new MarkerClusterer(map, markers);
+
+  var clusterStyles = [
+    {
+      textColor: 'white',
+      url: 'images/small.png',
+      height: 40,
+      width: 40,
+      backgroundPosition: "100px 0"
+    },
+   {
+      textColor: 'white',
+      url: 'images/medium.png',
+      height: 50,
+      width: 50,
+      backgroundPosition: "100px 0"
+    },
+   {
+      textColor: 'white',
+      url: 'images/large.png',
+      height: 60,
+      width: 60,
+      backgroundPosition: "100px 0"
+    }
+  ];
+
+  var mcOptions = {
+    gridSize: 50,
+    styles: clusterStyles,
+    maxZoom: 20
+  };
+
+  var markerCluster = new MarkerClusterer(map, markers, mcOptions);
 }
 
 
